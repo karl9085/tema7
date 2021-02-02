@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+
+
+    <script>
+        function myFunction() {
+            var d = new Date;
+            var n = d.getHours;
+        }
+
+        let godmorgen;
+        let goddag;
+        let godaften;
+        let godnat;
+        let resultat;
+
+
+        if (godmorgen <= 10) {
+            resultat = "Godmorgen";
+
+        } else if (goddag <= 18) {
+            resultat = "Goddag";
+        } else if (godaften <= 24) {
+            resultat = "Godaften";
+        } else if (godnat <= 5) {
+            resultat = "Godnat";
+        }
+
+        console.log(resultat);
+
+
+        //        document.querySelector("time").addEventListener("time", time);
+        //         void getTimeFromAndroid() {
+        //            Date dt = new Date();
+        //            let hours = dt.getHours();
+        //
+        //
+        //            if (hours >= 1 || hours <= 12) {
+        //                Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show();
+        //            } else if (hours >= 12 || hours <= 16) {
+        //                Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show();
+        //            } else if (hours >= 16 || hours <= 21) {
+        //                Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
+        //            } else if (hours >= 21 || hours <= 24) {
+        //                Toast.makeText(this, "Good Night", Toast.LENGTH_SHORT).show();
+        //            }
+        //        }
+
+    </script>
+</body>
+
+</html>
