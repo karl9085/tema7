@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <style>
-        main {
-            margin-left: 50px;
-            margin-right: 50px;
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
+        main {
+            width: 80vw;
+            margin: 0 auto;
         }
 
         section {
@@ -27,6 +31,11 @@
 
         img {
             width: 100%;
+        }
+
+        h1,
+        footer {
+            text-align: center;
         }
 
         header,
@@ -63,11 +72,5 @@
     </main>
     <footer> This is footer</footer>
 
-    <script>
-        const title = document.querySelector("header");
 
-        console.log(title);
-        title.textContent = "Billedgalleri"
-        title.innerHTML = "<h1>Title</h1>"
-    </script>
 </body></html>
