@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        main {
+            margin-left: 50px;
+            margin-right: 50px;
+
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 20px;
+
+        }
+
+        article {
+            border: 1px solid #888;
+
+
+        }
+
+        img {
+            width: 100%;
+        }
+
+        header,
+        footer {
+            padding: 10px 0;
+            border: 1px solid #888;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Title</h1>
+    </header>
+
+    <main>
+        <h2>Undertitel</h2>
+
+        <section>
+            <article>
+                <img src="https://placeimg.com/400/300/arch" alt="pic1" class="first">
+                <h3>Article 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque modi odio beatae aperiam ullam velit ut, iusto, pariatur consectetur delectus dolorum error esse, dicta repudiandae quia voluptatem ea eligendi, voluptate.</p>
+            </article>
+            <article><img src="https://placeimg.com/400/300/any" alt="pic2">
+                <h3>Article 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur a quae cupiditate, quidem cumque id non, animi tempore odio quasi? Asperiores voluptatum adipisci consectetur quasi dolore dolorum beatae sint, accusamus?</p>
+
+            </article>
+
+        </section>
+
+    </main>
+    <footer> This is footer</footer>
+
+    <script>
+        // Tester om DOM’en er loadet
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("dom er loaded");
+
+            //Overskrift
+            const title = document.querySelector("header");
+            console.log(title);
+            title.textContent = "Daily News"
+
+            const h1 = document.querySelector("h1");
+            console.log(h1);
+
+            //main
+            const main = document.querySelector("main");
+            console.log(main);
+
+            //h2
+            const h2 = document.querySelector("h2");
+            console.log(h2);
+            h2.textContent = "Did you hear?"
+
+            //section
+            const section = document.querySelector("section");
+            console.log(section);
+
+            //1. article
+            const article1 = document.querySelector("article1");
+            console.log(article1);
+
+            //2. article
+            const article2 = document.querySelector("article2");
+            console.log(article2);
+
+            //1. h3
+            const h3First = document.querySelector("article:first-child h3");
+            console.log(h3First);
+
+            h3First.textContent = "Burning Bridges"
+
+            //2. h3
+            const h3Second = document.querySelector("article:nth-child(2) h3");
+            console.log(h3Second);
+
+            h3Second.textContent = "Bed & Breakfast"
+            //1. p
+            const pFirst = document.querySelector("article:first-child p");
+            console.log(pFirst);
+
+            //2. p
+            const pSecond = document.querySelector("article:nth-child(2) p");
+            console.log(pSecond);
+
+
+            //Æændre billede
+            const pic1 = document.querySelector("article:first-child img");
+            console.log(pic1);
+            pic1.alt = "Billede af bygninger";
+
+            // opretter et nyt article-element 
+
+            let mainSection = document.querySelector("section");
+            //nyt article element
+            let newArticle = document.createElement("article");
+            //Nyt h3 element
+            let overskrift = document.createElement("h3");
+            // tekst til overskrift
+            let overskriftText = document.createTextNode("Article 3");
+            //indsæt tekst til overskrift
+            overskrift.appendChild(overskriftText);
+            //tilføj overskrift til article
+            newArticle.appendChild(overskrift);
+            // tilføj article til section
+            mainSection.appendChild(newArticle);
+
+
+            pic1.addEventListener("click", pictureClicked);
+
+            function pictureClicked() {
+
+                randomTal = Math.round(Math.random() * 10);
+                let newPic1 = document.querySelector("article:first-child img");
+                newPic1.src = "https://placeimg.com/400/300/arch" + randomTal;
+
+
+            }
+
+        }
+    </script>
+</body></html>
