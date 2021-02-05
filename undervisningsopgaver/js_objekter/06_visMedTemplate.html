@@ -1,0 +1,75 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+
+    <section id="data_container"> </section>
+    <template>
+        <article id="dyr">
+
+            <h3></h3>
+            <img src="" alt="">
+            <p>Type: </p>
+            <p>Levested:</p>
+
+        </article>
+    </template>
+
+
+    <script>
+        let dyrene = [{
+            "navn": "Gris",
+            "type": "Pattedyr",
+            "levested": "svinefarme",
+            "billede": "http://mabe-kea.dk/E19/pics/pig.png"
+        }, {
+            "navn": "frø",
+            "type": "amfibie",
+            "levested": "vandhul",
+            "billede": "http://mabe-kea.dk/E19/pics/frog.png"
+        }, {
+            "navn": "ræv",
+            "type": "pattedyr",
+            "levested": "byen",
+            "billede": "http://mabe-kea.dk/E19/pics/fox.png"
+
+        }, {
+            "navn": "sild",
+            "type": "fisk",
+            "levested": "havet",
+            "billede": "http://mabe-kea.dk/E19/pics/sild.jpg"
+        }, {
+            "navn": "Krokodille",
+            "type": "krybdyr",
+            "levested": "floder",
+            "billede": "http://mabe-kea.dk/E19/pics/kroko.jpg"
+        }]
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            const container = document.querySelector("#data_container");
+            const dyreTemplate = document.querySelector("template");
+            dyrene.forEach(dyr => {
+                let klon = dyreTemplate.cloneNode(true).content;
+                klon.querySelector("h3").textContent = dyr.navn;
+                klon.querySelector("p").textContent += dyr.type;
+                klon.querySelector("p + p").textContent += dyr.levested;
+                klon.querySelector("img").src = dyr.billede;
+
+                container.appendChild(klon);
+
+            })
+        }
+    </script>
+</body></html>
