@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 1em;
+            margin: 2em;
+        }
+
+        .person {
+            padding: 1em;
+            border: 1px solid;
+            border-radius: 1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: black;
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+
+
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+
+        }
+
+
+        .valgt {
+            background-color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Menu</h1>
+
+
+        <nav>
+            <button data-retter="alle" class="valgt">Alle</button>
+            <button data-retter="forretter">Forretter</button>
+            <button data-retter="hovedretter">Hovedretter</button>
+            <button data-retter="desserter">Desserter</button>
+            <button data-retter="drikkevarer">Drikkevarer</button>
+
+        </nav>
+    </header>
+
+    <section id="liste"></section>
+    <template>
+        <article class="kategori">
+            <img src="" alt="" class="billede">
+            <h2 class="navn"></h2>
+            <p class="kortbeskrivelse"></p>
+            <p class="pris"></p>
+            <button class="detaljer">Detaljer</button>
+        </article>
+    </template>
+
+
+
+
+
+
+
+
+    <script>
+        const header = document.querySelector(" header h1");
+        const medieurl = "https://babushka-dd8a.restdb.io/media/";
+        const myHeaders = {
+
+            'x-apikey': "600ec2fb1346a1524ff12de4"
+
+        }
+        document.addEventListener("DOMContentLoaded", start)
+
+
+        let filter = "alle";
+        let ret;
+
+        function start() {
+
+
+
+            const filterKnapper = document.querySelectorAll("nav button");
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerRetter));
+            loadJSON();
+
+
+
+            function filtrerRetter() {
+                filter = this.dataset.retter; //sat varaibel "filter" til værdien af data-troende på den knap der er klikket på
+                document.querySelector(".valgt").classList.remove("valgt");
+                this.classList.add("valgt");
+                visRetter(); // kald funktionen visRetter efter det nye filter er sat
+                header.textContent = this.textContent;
+
+            }
+
+
+            async function loadJSON() {
+                const JSONData = await fetch("https://babushka-dd8a.restdb.io/rest/menu", {
+                    headers: myHeaders
+                });
+                retter = await JSONData.json();
+                console.log("Retter", retter);
+                visRetter();
+            }
+
+
+            //
+            //        //funktion der viser personer i liste view
+            //        function visRetter() {
+            //            const dest = document.querySelector("#liste");
+            //            const skabelon = document.querySelector("template").content;
+            //            dest.textContent = "";
+            //
+            //
+            //
+            //            retter.forEach(ret => {
+            //                console.log("Retter", ret.navn);
+            //                if (filter == ret.kategori || filter == "alle") {
+            //                    const klon = skabelon.cloneNode(true);
+            //                    klon.querySelector(".billede").src = medieurl + ret.billede;
+            //                    klon.querySelector(".navn").textContent = ret.navn;
+            //                    klon.querySelector("article:first-child p").textContent = ret.kortbeskrivelse;
+            //                    klon.querySelector("p:nth-of-type(2n)").textContent = ret.pris;
+            //                    klon.querySelector(".detajler").textContent = ret.detajler;
+            //                    dest.appendChild(klon);
+            //
+            //                }
+            //            })
+            //        }
+
+
+
+
+            //funktion der viser personer i liste view
+            function visRetter() {
+                const dest = document.querySelector("#liste");
+                const skabelon = document.querySelector("template").content;
+                dest.textContent = "";
+
+
+
+                retter.forEach(ret => {
+                    console.log("Retter", ret.navn);
+                    if (filter == ret.kategori || filter == "alle") {
+                        const klon = skabelon.cloneNode(true);
+
+                        klon.querySelector(".navn").textContent = ret.navn + "";
+                        klon.querySelector(".pris").textContent = ret.pris + (`kr.`);
+                        klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse + " ";
+                        klon.querySelector(".billede").src = medieurl + ret.billede;
+
+                        dest.appendChild(klon);
+
+                    }
+                })
+            }
+        }
+    </script>
+</body></html>
