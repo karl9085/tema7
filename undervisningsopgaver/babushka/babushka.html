@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap" rel="stylesheet">
+
+
+    <title>Bistro Babushka</title>
+
+
+    <style>
+        /*        mobil first*/
+
+        /*menu til burger*/
+
+        .hidden {
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        #menuknap_wrapper {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: black;
+            margin-top: -39px;
+        }
+
+
+
+
+
+        #menuknap {
+            display: inline-block;
+
+
+        }
+
+        #menu {
+            list-style-type: none;
+            display: block;
+            margin-bottom: 40;
+            padding-right: 30px;
+
+        }
+
+
+
+
+
+
+        /* ------- burgermenu icon -----------*/
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 34px;
+            height: 5px;
+            background-color: black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+            transform: rotate(-45deg) translate(-9px, 6px);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            -webkit-transform: rotate(45deg) translate(-8px, -8px);
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+
+        /*        Indhold*/
+
+
+        body {
+            background-color: rgba(191, 140, 63, 0.37);
+        }
+
+        img {
+            width: 100%;
+        }
+
+        #first_section .section_wrapper h1 {
+            font-size: 5rem;
+            font-family: 'Bodoni Moda', serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+            color: #503213;
+
+        }
+
+        #first_section .section_wrapper1 img {
+
+            width: 25%;
+            position: relative;
+            max-width: 100%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 90px;
+            margin-top: -50px;
+        }
+
+        button {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1rem;
+            padding: -1px 20px;
+            margin: 5px;
+            background-color: #503213;
+
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2rem;
+            text-align: center;
+            color: #503213;
+        }
+
+        h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2rem;
+            color: #503213;
+        }
+
+        p {
+            font-family: 'Bodoni Moda', serif;
+            color: #503213;
+
+        }
+
+        button {
+
+            font-size: 1rem;
+            padding: 0px 20px;
+            margin: 5px;
+
+        }
+
+
+
+
+        nav {
+
+            text-align: center;
+
+
+        }
+
+
+        .filter {
+            display: flex;
+            justify-content: center;
+            margin: 2%;
+            border-width: thick;
+        }
+
+
+
+
+        .filter:hover {
+            opacity: 0.5;
+        }
+
+        .valgt {
+            background-color: #FF9D2C;
+        }
+
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 4fr));
+            grid-gap: 2em;
+            margin: 2em;
+        }
+
+
+        @media only screen and (min-width: 768px) {
+
+
+
+
+
+
+
+
+
+            button {
+                font-size: 1.3rem;
+            }
+
+
+
+
+
+            #menuknap {
+                display: none;
+            }
+
+            #menu.hidden {
+                opacity: 1;
+            }
+
+
+
+
+
+
+
+            #menuknap_wrapper {
+
+                padding-right: 30px;
+                width: 20%;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <section id="first_section">
+        <div class="section_wrapper">
+            <h1>Bistro Babushka</h1>
+
+        </div>
+        <div class="section_wrapper1">
+            <img src="logo1.png" alt="">
+        </div>
+    </section>
+    <header>
+
+
+
+
+        <nav>
+            <div id="menuknap_wrapper">
+                <div id="menuknap">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </div>
+            <ul id="menu" class="hidden">
+                <button data-retter="alle" class="valgt">Alle</button>
+                <button data-retter="forretter">Forretter</button>
+                <button data-retter="hovedretter">Hovedretter</button>
+                <button data-retter="desserter">Desserter</button>
+                <button data-retter="drikkevarer">Drikkevarer</button>
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <section id="liste"></section>
+    <template>
+        <article class="kategori">
+            <img src="" alt="" class="billede">
+            <h2 class="navn"></h2>
+            <p class="langbeskrivelse"></p>
+            <p class="kortbeskrivelse"></p>
+            <p class="oprindelsesregion"></p>
+            <p class="pris"></p>
+            <button class="detaljer">Detaljer</button>
+        </article>
+    </template>
+
+
+
+
+
+
+
+
+    <script>
+        const header = document.querySelector(" header h1");
+        const medieurl = "https://babushka-dd8a.restdb.io/media/";
+        const myHeaders = {
+
+            'x-apikey': "600ec2fb1346a1524ff12de4"
+
+        }
+        document.addEventListener("DOMContentLoaded", loadJSON)
+
+
+        let filter = "alle";
+        let ret;
+
+        function loadJSON() {
+            console.log(loadJSON);
+
+
+            const filterKnapper = document.querySelectorAll("nav button");
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerRetter));
+            loadJSON();
+
+            document.querySelector("#menuknap").addEventListener("click", toggleMenu);
+
+            function toggleMenu() {
+                console.log("toggleMenu");
+                document.querySelector("#menu").classList.toggle("hidden");
+                myFunction(this);
+
+            }
+
+            function myFunction(x) {
+
+                x.classList.toggle("change");
+            }
+
+
+            function filtrerRetter() {
+                console.log(filtrerRetter);
+
+                filter = this.dataset.retter; //sat varaibel "filter" til værdien af data-troende på den knap der er klikket på
+                document.querySelector(".valgt").classList.remove("valgt");
+                this.classList.add("valgt");
+                visRetter(); // kald funktionen visRetter efter det nye filter er sat
+                header.textContent = this.textContent;
+
+            }
+
+
+            async function loadJSON() {
+                console.log(loadJSON);
+                const JSONData = await fetch("https://babushka-dd8a.restdb.io/rest/menu", {
+                    headers: myHeaders
+                });
+                retter = await JSONData.json();
+                console.log("Retter", retter);
+                visRetter();
+            }
+
+
+
+
+            //funktion der viser personer i liste view
+            function visRetter() {
+                console.log(visRetter);
+                const dest = document.querySelector("#liste");
+                const skabelon = document.querySelector("template").content;
+                dest.textContent = "";
+
+
+
+                retter.forEach(ret => {
+                    console.log("Retter", ret.navn);
+                    if (filter == ret.kategori || filter == "alle") {
+                        const klon = skabelon.cloneNode(true);
+
+                        klon.querySelector(".navn").textContent = ret.navn + "";
+                        klon.querySelector(".pris").textContent = ret.pris + (`kr.`);
+                        klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse + " ";
+                        klon.querySelector(".billede").src = medieurl + ret.billede;
+                        klon.querySelector("article").addEventListener("click", () => visDetaljer(ret));
+                        dest.appendChild(klon);
+
+                    }
+                })
+            }
+
+            function visDetaljer(hvem) {
+                console.log(visDetaljer);
+                location.href = `babushka_detalje.html?id=${hvem._id}`;
+            }
+        }
+    </script>
+    <!--    <script src="script.js"></script>-->
+</body></html>
